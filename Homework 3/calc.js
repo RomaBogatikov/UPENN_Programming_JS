@@ -7,13 +7,11 @@ var input = function() {
     var value = $(this).val();
     // set the value if input field is empty or operation button was clicked
     if ($('#display').val() === '' || operationFlag === true) {
-        // prevent number to start with 0
-        if (value === '0') {}
-        else {
-            operationFlag = false;
-            $('#display').attr('value', value);
-        }
+        operationFlag = false;
+        $('#display').attr('value', value);      
     }
+    // prevent entering 0 zeroes in the beginning of the number
+    else if ($('#display').val() === '0') {}
     // otherwise append clicked values
     else {
         value = $('#display').val() + value;
