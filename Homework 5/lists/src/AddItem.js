@@ -10,8 +10,16 @@ class AddItem extends Component {
   }
 
   handleSubmit(e) {
-      e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-
+    e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
+    if (this.refs.id.value === '') {
+      alert('You need to provide a name');
+    }
+    else {
+      var newItem = this.refs.id.value;
+      this.setState( { newItem: newItem }, function() {
+        this.props.addItem(this.state.newItem);
+      } );
+    }
       // Implement the rest of this function here!
   }
     
