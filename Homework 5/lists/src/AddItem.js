@@ -15,7 +15,8 @@ class AddItem extends Component {
       alert('You need to provide a name');
     }
     else {
-      var newItem = this.refs.id.value;
+      var value = this.refs.id.value;
+      var newItem = { name: value };
       this.setState( { newItem: newItem }, function() {
         this.props.addItem(this.state.newItem);
       } );
