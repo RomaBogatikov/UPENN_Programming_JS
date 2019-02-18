@@ -41,7 +41,25 @@ app.use('/createToy', (req, res) => {
         else {
             res.render('created', { newToy: newToy });
         }
-    })
+    });
+});
+
+app.use('/findToyAPI', (req, res) => {
+    var query = {};
+    if (req.query.id) query.id = req.query.id;
+
+    if (Object.keys(query).length != 0) {
+        Toy.find(query, (err, toys) => {
+            if (!err) {
+                res.json(toys);
+            }
+            else {
+                console.log(err);
+                res.json({});
+            }
+        })
+    }
+    else res.json({});
 })
 
 

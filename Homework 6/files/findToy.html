@@ -1,7 +1,48 @@
-<p>Please, specify the ID of the toy you want to find:</p>
-<form action='/findToy' method='post'>
-    id: <input name='id'><br>
-    <br>
-    <input type='submit' value='Find'>  
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Toy Finder</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <p>Please, specify the ID of the toy you want to find:</p>
+        <form action='/findToyAPI' method='post'>
+            id: <input name='id'><br>
+            <br>
+           <!--<input type='submit' value='Find' -->
+        </form>
+
+        <ul>
+            <div id='results'></div>
+        </ul>
+
+    <script>
+        // if the user types anything in the input field, invoke the following function
+        $("input").on("change input textInput", () => {
+            // get the value of the input field
+            var id = $("input[name='id']").val();
+            // construct a url to send to server
+            var query = '?';
+            if (id) query += 'id=' + id;
+            var url = 'http://localhost:3000/findToyAPI/' + query;
+            // request the data from the server, and apply the function
+            $.getJSON(url, (toys, status) => {
+                var results = $("#results");
+                // list all properties and values of the toys[0] object
+                results.html('');
+                for (var property in toys[0]) {
+                    results.append('<li><i>' + property + ': </i>' + toys[0][property] + '</li>')
+                }
+            });
+        });
+
+        
+    </script>
+    </body>
+</html>
+
+
+
 
